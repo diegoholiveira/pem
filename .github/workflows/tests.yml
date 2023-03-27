@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node_js: ['14', '16', '18']
+        node-version: [14.x, 16.x, 18.x]
         OPENSSL_DIR: ['']
         LIBRARY: ['']
         VERSION: ['']
@@ -82,10 +82,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - run: sudo apt-get install -y haveged ca-certificates
-    - name: Setup node
+    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node_js }}
+        node-version: ${{ matrix.node-version }}
         cache: yarn
     - run: |
         sudo haveged -w 2048
