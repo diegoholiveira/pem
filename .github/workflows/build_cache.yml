@@ -26,7 +26,7 @@ jobs:
         mkdir -p openssl
     - name: test me
       shell: bash
-      run: | 
+      run: |
         touch openssl/.test
         tar cfJ all_versions.tar.xz openssl/
         ls -lahR openssl/

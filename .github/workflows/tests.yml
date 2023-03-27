@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node_js: ['14', '16']
+        node_js: ['14', '16', '18']
         OPENSSL_DIR: ['']
         LIBRARY: ['']
         VERSION: ['']
@@ -91,13 +91,9 @@ jobs:
         sudo haveged -w 2048
         mkdir openssl
     - name: Download OpenSSL Artifacts
-      uses: greenbone/actions/artifacts-download-trigger@v1
+      uses: actions/download-artifact@v3
       with:
         workflow: build_cache.yml
-        gh-token: ${{ secrets.BOT_PIPELINE_TOKEN }}
-        download-artifacts: true
-        wait-for-completion-interval: 60s
-        wait-for-completion-timeout: 45m
         name: openssl_build
         path: ./openssl/
     - name: Set ENV
